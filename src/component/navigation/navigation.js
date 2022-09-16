@@ -3,11 +3,9 @@ import './navigation.css';
 const Navigation = () => {
     return (
         <>
-
             <div>
                 Hallo
             </div>
-
         </>
     )
 
