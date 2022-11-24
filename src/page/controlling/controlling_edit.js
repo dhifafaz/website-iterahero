@@ -30,7 +30,7 @@ const Controlling_Edit = () => {
 	const header = localStorage.getItem("token");
 	const [iconSelected, setIconSelected] = useState("");
 
-	const [isloading, checkLoading] = useState(false);
+	const [isloading, checkLoading] = useState(true);
 
 	const schema = yup.object({
 		name: yup.string().required("Nama harus diisi"),
@@ -72,8 +72,9 @@ const Controlling_Edit = () => {
 		axios
 			.get(icons)
 			.then((response) => {
-				console.log("isi response", response);
+				// console.log("isi response", response);
 				setIconsList(response.data.data);
+				checkLoading(false);
 			})
 			.catch((error) => {
 				console.log(error);
@@ -104,6 +105,7 @@ const Controlling_Edit = () => {
 	useEffect(() => {
 		dispatch(routePageName("Controlling"));
 		getIcon();
+		checkLoading(true);
 	}, []);
 
 	return (

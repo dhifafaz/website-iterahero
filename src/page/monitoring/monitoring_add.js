@@ -29,17 +29,7 @@ import {
 import axios from "axios";
 import Loading from "../../component/loading/loading";
 
-const schema = yup.object({
-	name: yup.string().required("Nama harus diisi"),
-	icon: yup.string().required("icon harus diisi"),
-	color: yup.string().required("Warna harus diisi"),
-	brand: yup.string().required("Satuan Ukur harus diisi"),
-	unit_measurement: yup.string().required("Merek harus diisi"),
-	range_max: yup.number().required("Range Max harus diisi"),
-	range_min: yup.number().required("Range Min harus diisi"),
-	id_category_sensor: yup.number().required("Kategori harus diisi"),
-	id_greenhouse: yup.number().required(""),
-});
+
 const Monitoring_Add = () => {
 	const navigate = useNavigate();
 	TabTitle("Tambah Sensor - ITERA Hero");
@@ -58,6 +48,18 @@ const Monitoring_Add = () => {
 			.catch((error) => {
 			});
 	};
+
+	const schema = yup.object({
+	name: yup.string().required("Nama harus diisi"),
+	icon: yup.string().required("icon harus diisi"),
+	color: yup.string().required("Warna harus diisi"),
+	brand: yup.string().required("Satuan Ukur harus diisi"),
+	unit_measurement: yup.string().required("Merek harus diisi"),
+	range_max: yup.number().required("Range Max harus diisi"),
+	range_min: yup.number().required("Range Min harus diisi"),
+	id_category_sensor: yup.number().required("Kategori harus diisi"),
+	id_greenhouse: yup.number().required(""),
+});
 	const [iconsList, setIconsList] = useState();
 	const getIcon = async () => {
 		axios.get(icons)

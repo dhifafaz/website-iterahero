@@ -31,7 +31,7 @@ const Monitoring_Edit = () => {
 	const header = localStorage.getItem("token");
 	const [iconSelected, setIconSelected] = useState("");
 
-	const [isloading, checkLoading] = useState(false);
+	const [isloading, checkLoading] = useState(true);
 
 	const schema = yup.object({
 		name: yup.string().required("Nama harus diisi"),
@@ -108,6 +108,7 @@ const Monitoring_Edit = () => {
 			.get(icons)
 			.then((response) => {
 				setIconsList(response.data.data);
+				checkLoading(false);
 			})
 			.catch((error) => {
 				console.log(error);
@@ -174,11 +175,12 @@ const Monitoring_Edit = () => {
 		dispatch(routePageName("Monitoring"));
 		getDataCategory();
 		getIcon();
+		checkLoading(true);
 	}, []);
 
 	return (
 		<>
-			{dataCategory == null || isloading ? (
+			{dataCategory == null || iconsList == null || isloading ? (
 				<Loading />
 			) : (
 				<Flex w="100%" flexDir={"column"}>
