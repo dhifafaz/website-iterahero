@@ -29,11 +29,13 @@ import {
 import axios from "axios";
 import Loading from "../../component/loading/loading";
 
-
 const Monitoring_Add = () => {
 	const navigate = useNavigate();
 	TabTitle("Tambah Sensor - ITERA Hero");
 	const { id } = useParams();
+
+	const [isloading, checkLoading] = useState(true);
+
 	const [dataApi, setDataApi] = useState(null);
 	const getDataApi = async () => {
 		axios
@@ -45,29 +47,32 @@ const Monitoring_Add = () => {
 			.then((response) => {
 				setDataApi(response.data.data);
 			})
-			.catch((error) => {
-			});
+			.catch((error) => {});
 	};
 
 	const schema = yup.object({
-	name: yup.string().required("Nama harus diisi"),
-	icon: yup.string().required("icon harus diisi"),
-	color: yup.string().required("Warna harus diisi"),
-	brand: yup.string().required("Satuan Ukur harus diisi"),
-	unit_measurement: yup.string().required("Merek harus diisi"),
-	range_max: yup.number().required("Range Max harus diisi"),
-	range_min: yup.number().required("Range Min harus diisi"),
-	id_category_sensor: yup.number().required("Kategori harus diisi"),
-	id_greenhouse: yup.number().required(""),
-});
-	const [iconsList, setIconsList] = useState();
+		name: yup.string().required("Nama harus diisi"),
+		icon: yup.string().required("icon harus diisi"),
+		color: yup.string().required("Warna harus diisi"),
+		brand: yup.string().required("Satuan Ukur harus diisi"),
+		unit_measurement: yup.string().required("Merek harus diisi"),
+		range_max: yup.number().required("Range Max harus diisi"),
+		range_min: yup.number().required("Range Min harus diisi"),
+		id_category_sensor: yup.number().required("Kategori harus diisi"),
+		id_greenhouse: yup.number().required(""),
+	});
+	const [iconsList, setIconsList] = useState(null);
 	const getIcon = async () => {
-		axios.get(icons)
-		.then((response) => {
-			setIconsList(response.data.data);
-		})
-		.catch((error) => {	
-		});
+		axios
+			.get(icons)
+			.then((response) => {
+				// console.log("isi response", response);
+				setIconsList(response.data.data);
+				checkLoading(false);
+			})
+			.catch((error) => {
+				console.log(error);
+			});
 	};
 	const [dataCategory, setDataCategory] = useState(null);
 	const header = localStorage.getItem("token");
@@ -82,6 +87,7 @@ const Monitoring_Add = () => {
 				setDataCategory(response.data.data);
 			})
 			.catch((error) => {
+				console.log(error);
 			});
 	};
 	const [icon_selected, setIcon_selected] = useState("");
@@ -92,11 +98,15 @@ const Monitoring_Add = () => {
 		getDataCategory();
 		getDataApi();
 		getIcon();
+		checkLoading(true);
 	}, []);
 
 	return (
 		<>
-			{dataApi == null || dataCategory == null || icons == null ? (
+			{dataApi == null ||
+			dataCategory == null ||
+			iconsList == null ||
+			isloading ? (
 				<Loading />
 			) : (
 				<Flex w="100%" flexDir={"column"}>
@@ -235,19 +245,20 @@ const Monitoring_Add = () => {
 											setIcon_selected(e.target.value);
 										}}
 										onBlur={handleBlur}
-										defaultValue={values.icon}
+										// defaultValue={values.icon}
+										value={values.icon}
 										name="icon"
 										id="icon">
 										<option defaultValue="" selected>
 											Pilih Icon
 										</option>
-										{iconsList.map((item) => (
-											item.type =='sensor'? (
-												<option defaultValue={item.icon} color={"var(--color-primer)"}>
+										{iconsList.map((item) =>
+											item.type == "sensor" ? (
+												<option value={item.icon} color={"var(--color-primer)"}>
 													{item.name}
 												</option>
 											) : null
-										))}
+										)}
 									</Select>
 									<Flex m={"15px"}>
 										<Image src={icon_selected} />
@@ -264,18 +275,21 @@ const Monitoring_Add = () => {
 										marginTop={"0 auto"}
 										type="hidden"
 										name="color"
-										defaultValue={values.color}
+										value={values.color}
 										onChange={handleChange}
 										onBlur={handleBlur}
 										variant="outline">
 										<option defaultValue="">Pilih Warna</option>
-										{iconsList.map((item) => (
-											item.type =='sensor' && item.icon == icon_selected? (
-												<option defaultValue={item.color} color={"var(--color-primer)"} selected>
+										{iconsList.map((item) =>
+											item.type == "sensor" && item.icon == icon_selected ? (
+												<option
+													value={item.color}
+													color={"var(--color-primer)"}
+													selected>
 													{item.name}
 												</option>
 											) : null
-										))}
+										)}
 									</Select>
 									<Flex m={"15px"}>
 										<Circle bg={values.color} size="30px" />
