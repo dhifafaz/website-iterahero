@@ -42,11 +42,7 @@ const CardAktuator = (props) => {
 
     useEffect(() => {
       getPagination()
-      return () => {
-        
-        setIsLoading(true)
-        
-      };
+      setIsLoading(true)
     },[idApi]);
     return (
         <>
