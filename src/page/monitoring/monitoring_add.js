@@ -55,6 +55,7 @@ const Monitoring_Add = () => {
 		icon: yup.string().required("icon harus diisi"),
 		color: yup.string().required("Warna harus diisi"),
 		brand: yup.string().required("Satuan Ukur harus diisi"),
+		calibration: yup.string().required("Persamaan Kalibrasi harus diisi"),
 		unit_measurement: yup.string().required("Merek harus diisi"),
 		range_max: yup.number().required("Range Max harus diisi"),
 		range_min: yup.number().required("Range Min harus diisi"),
@@ -161,6 +162,7 @@ const Monitoring_Add = () => {
 							icon: "",
 							color: "",
 							brand: "",
+							calibration: "",
 							unit_measurement: "",
 							range_max: "",
 							range_min: "",
@@ -173,6 +175,7 @@ const Monitoring_Add = () => {
 								submitedData.append("name", values.name);
 								submitedData.append("icon", values.icon);
 								submitedData.append("color", values.color);
+								submitedData.append("calibration", values.calibration);
 								submitedData.append("brand", values.brand);
 								submitedData.append(
 									"unit_measurement",
@@ -295,6 +298,24 @@ const Monitoring_Add = () => {
 										<Circle bg={values.color} size="30px" />
 									</Flex>
 									<FormErrorMessage>{errors.color}</FormErrorMessage>
+								</FormControl>
+								<FormControl
+									marginTop={"20px"}
+									isInvalid={errors.calibration && touched.calibration}>
+									<FormLabel color={"var(--color-primer)"}>Persamaan Kalibrasi</FormLabel>
+									<Input
+										color={"var(--color-primer)"}
+										maxWidth={"100%"}
+										marginTop={"0 auto"}
+										type="text"
+										name="calibration"
+										defaultValue={values.calibration}
+										onChange={handleChange}
+										onBlur={handleBlur}
+										variant="outline"
+										placeholder="Persamaan Kalibrasi..."
+									/>
+									<FormErrorMessage>{errors.calibration}</FormErrorMessage>
 								</FormControl>
 								<FormControl
 									marginTop={"20px"}

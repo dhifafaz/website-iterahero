@@ -37,6 +37,7 @@ const Monitoring_Edit = () => {
 		name: yup.string().required("Nama harus diisi"),
 		icon: yup.string().required("Ikon harus diisi"),
 		color: yup.string().required("Warna harus diisi"),
+		calibration: yup.string().required("Persamaan Kalibrasi harus diisi"),
 		unit_measurement: yup.string().required("Satuan Ukur harus diisi"),
 		brand: yup.string().required("brand harus diisi"),
 		range_max: yup.number().required("Range Max harus diisi"),
@@ -66,6 +67,7 @@ const Monitoring_Edit = () => {
 		valueName,
 		valueIcon,
 		valueColor,
+		valueCalibration,
 		valueUnit,
 		valueBrand,
 		valueMax,
@@ -79,6 +81,7 @@ const Monitoring_Edit = () => {
 					name: valueName,
 					icon: valueIcon,
 					color: valueColor,
+					calibration: valueCalibration,
 					unit_measurement: valueUnit,
 					brand: valueBrand,
 					range_max: valueMax,
@@ -119,6 +122,7 @@ const Monitoring_Edit = () => {
 		name: "",
 		icon: "",
 		color: "",
+		calibration: "",
 		unit_measurement: "",
 		brand: "",
 		range_max: "",
@@ -130,6 +134,7 @@ const Monitoring_Edit = () => {
 		name,
 		icon,
 		color,
+		calibration,
 		unit_measurement,
 		brand,
 		range_max,
@@ -139,6 +144,7 @@ const Monitoring_Edit = () => {
 		dataSend.name = name;
 		dataSend.icon = icon;
 		dataSend.color = color;
+		dataSend.calibration = calibration;
 		dataSend.unit_measurement = unit_measurement;
 		dataSend.brand = brand;
 		dataSend.range_max = range_max;
@@ -149,6 +155,7 @@ const Monitoring_Edit = () => {
 			dataSend.name == "" ||
 			dataSend.icon == "" ||
 			dataSend.color == "" ||
+			dataSend.calibration == "" ||
 			dataSend.unit_measurement == "" ||
 			dataSend.brand == "" ||
 			dataSend.range_max == "" ||
@@ -162,6 +169,7 @@ const Monitoring_Edit = () => {
 				name,
 				icon,
 				color,
+				calibration,
 				unit_measurement,
 				brand,
 				range_max,
@@ -221,6 +229,7 @@ const Monitoring_Edit = () => {
 							name: data.name,
 							icon: data.icon,
 							color: data.color,
+							calibration: data.calibration,
 							unit_measurement: data.unit_measurement,
 							brand: data.brand,
 							range_max: data.range_max,
@@ -317,6 +326,24 @@ const Monitoring_Edit = () => {
 										<Circle bg={values.color} size="30px" />
 									</Flex>
 									<FormErrorMessage>{errors.color}</FormErrorMessage>
+								</FormControl>
+								<FormControl
+									marginTop={"20px"}
+									isInvalid={errors.calibration && touched.calibration}>
+									<FormLabel color={"var(--color-primer)"}>Persamaan Kalibrasi</FormLabel>
+									<Input
+										color={"var(--color-primer)"}
+										maxWidth={"100%"}
+										marginTop={"0 auto"}
+										type="text"
+										name="calibration"
+										defaultValue={values.calibration}
+										onChange={handleChange}
+										onBlur={handleBlur}
+										variant="outline"
+										placeholder="Persamaan Kalibrasi..."
+									/>
+									<FormErrorMessage>{errors.calibration}</FormErrorMessage>
 								</FormControl>
 								<FormControl
 									marginTop={"20px"}
@@ -431,6 +458,7 @@ const Monitoring_Edit = () => {
 												values.name,
 												values.icon,
 												values.color,
+												values.calibration,
 												values.unit_measurement,
 												values.brand,
 												values.range_max,
