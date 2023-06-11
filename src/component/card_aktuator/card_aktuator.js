@@ -7,6 +7,7 @@ import {
   WrapItem,
   Center,
 } from "@chakra-ui/react";
+import { Link } from "react-router-dom"
 import axios from 'axios';
 import { paginationAktuator } from "../..//Utility/api_link";
 import Loading from "../../component/loading/loading";
@@ -57,28 +58,29 @@ const CardAktuator = (props) => {
                 <Flex align={'center'} justify={'center'} mt={'30px'}>
                   <Wrap className='center-ul' align={'center'} spacing={'30px'} mt={'30px'}>
                     {dataTable.map((item, index) => (
-
-                      <WrapItem className='hiya' key={index}
-                        w={['sm']}
-                        bg={'#ffff'}
-                        borderRadius={'10px'}
-                        border={'1px solid #E2E8F0'}
-                        paddingTop={'30px'}
-                        paddingBottom={'30px'}
-                      >
-                        <Center justifyContent={'center'} flexDir={'column'} data={{ data: idApi }}>
-                          <Flex flexDir={'row'} justify={'space-between'}>
-                            <Image size={5} src={`${item.icon}`} color={item.color} />
-                            <Text color={`${item.color}`}>{item.name}</Text>
-                          </Flex>
-                          <Flex flexDir={'column'} justify={'center'}>
-                            <ValueAktuator data={{
-                              id: item.id,
-                              life_cycle: item.status_lifecycle,
-                            }} />
-                          </Flex>
-                        </Center>
-                      </WrapItem>
+                      <Link to={`/unit/dashboard/aktuator/${item.id}`} >
+                        <WrapItem className='hiya' key={index}
+                          w={['sm']}
+                          bg={'#ffff'}
+                          borderRadius={'10px'}
+                          border={'1px solid #E2E8F0'}
+                          paddingTop={'30px'}
+                          paddingBottom={'30px'}
+                        >
+                          <Center justifyContent={'center'} flexDir={'column'} data={{ data: idApi }}>
+                            <Flex flexDir={'row'} justify={'space-between'}>
+                              <Image size={5} src={`${item.icon}`} color={item.color} />
+                              <Text color={`${item.color}`}>{item.name}</Text>
+                            </Flex>
+                            <Flex flexDir={'column'} justify={'center'}>
+                              <ValueAktuator data={{
+                                id: item.id,
+                                life_cycle: item.status_lifecycle,
+                              }} />
+                            </Flex>
+                          </Center>
+                        </WrapItem>
+                      </Link>
                     ))}
                   </Wrap>
                 </Flex>

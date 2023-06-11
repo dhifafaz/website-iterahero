@@ -19,6 +19,7 @@ import Controlling_Add from "./page/controlling/controlling_add";
 import Monitoring_Edit from "./page/monitoring/monitoring_edit";
 import Controlling_Edit from "./page/controlling/controlling_edit";
 import MoreNotification from "./page/notification/more_notification";
+import Automation from "./page/automation/automation";
 import Grafik from "./page/grafik/grafik";
 
 function App() {
@@ -43,6 +44,8 @@ function App() {
 				<Route path="controlling/add/:id" element={<Controlling_Add />} />
 				<Route path="monitoring/edit/:id" element={<Monitoring_Edit />} />
 				<Route path="controlling/edit/:id" element={<Controlling_Edit />} />
+				<Route path="controlling/edit/:id" element={<Controlling_Edit />} />
+				<Route path="dashboard/aktuator/:id" element={<Automation />} />
 			</Route>
 		</Routes>
 	);
