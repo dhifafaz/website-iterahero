@@ -1,37 +1,36 @@
 import React, { useState, useEffect } from "react";
-import { Text, Button, Select, Tr, Image, Flex, Wrap } from "@chakra-ui/react";
-import { Formik } from "formik";
-import { Line } from "react-chartjs-2";
+import { Text, Button, Flex, Wrap } from "@chakra-ui/react";
 import { Link, useParams } from "react-router-dom";
 import axios from "axios";
 import Loading from "../../component/loading/loading";
 import { TabTitle } from "../../Utility/utility";
 import { useNavigate } from "react-router";
-import "./grafik.css";
-import { idSensor, getGrafikSensor } from "../../Utility/api_link";
+import { getActuatorDetail } from "../../Utility/api_link";
 import dashboardControlMenu from "../../Utility/dashboard_control_menu";
-import infoGrafik from "../../Utility/grafikDropDown";
-import GrafikComponent from "../../component/grafik_component/grafik_component";
+import CardLogActuator from "../../component/card_log_actuator/card_log_act";
+import CardSensor from "../../component/card_sensor/card_sensor";
+
 
 const Automation = () => {
-  TabTitle("Grafik - ITERA Hero");
+  TabTitle("Detail Actuator - ITERA Hero");
   const [data, setData] = useState("");
   const [dataApi, setDataApi] = useState(null);
   const [selected, setSelected] = useState(1);
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
   const { id } = useParams();
-  const getSensor = async () => {
+
+  const getActuator = async () => {
     setIsLoading(true);
     const header = localStorage.getItem("token");
     await axios
-      .get(`${idSensor}${id}`, {
+      .get(`${getActuatorDetail}${id}`, {
         headers: {
           Authorization: "Bearer " + header,
         },
       })
       .then((response) => {
-        setDataApi(response.data.data[0].name);
+        setDataApi(response.data.data.name);
         setIsLoading(false);
       })
       .catch((error) => {
@@ -41,8 +40,7 @@ const Automation = () => {
   };
 
   useEffect(() => {
-    getSensor();
-    // getSensorData()
+    getActuator();
   }, [id, data]);
 
   return (
@@ -70,10 +68,10 @@ const Automation = () => {
           </Flex>
           <Flex>
             <Flex width={"100%"}>
-              <Wrap mt={"30px"} flexDir={"row"}>
+              <Wrap flexDir={"row"}>
                 {dashboardControlMenu.map((item, index) => {
                   return (
-                    <Flex key={index} mr={"3"} width={"169px"} height={"44px"}>
+                    <Flex key={index} width={"169px"} height={"44px"}>
                       <Button
                         onClick={() => setSelected(item.id)}
                         w="100%"
@@ -112,22 +110,13 @@ const Automation = () => {
               </Wrap>
             </Flex>
           </Flex>
-          {data == "" ? (
-            <></>
-          ) : (
-            (console.log(data),
-            console.log(id),
-            (
-              <GrafikComponent
-                size="lg"
-                className="grafik"
-                data={{
-                  value: data,
-                  id: id,
-                }}
-              />
-            ))
-          )}
+          <Flex>
+              <Wrap justify={'center'}>
+                {
+                selected === 1? <CardSensor data={{id : id}}/> :  <CardLogActuator data={{id : id}}/>
+                }
+              </Wrap>
+            </Flex>
         </>
       )}
     </>
