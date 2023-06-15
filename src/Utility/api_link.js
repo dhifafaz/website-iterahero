@@ -45,3 +45,5 @@ export const postLogAktuator = `${base_url}/api/v1/actuator-log`;
 export const icons = `${base_url}/api/v1/icon`;
 export const Status =
 	`${base_url}/api/v1/actuator-broker?id_actuator=`;
+export const actuatorLogToday = 
+`${base_url}/api/v1/actuator-log-today/`

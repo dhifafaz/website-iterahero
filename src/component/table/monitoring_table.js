@@ -140,7 +140,7 @@ useEffect(() => {
 									<Th textAlign={"center"}>Satuan Ukur</Th>
 									<Th textAlign={"center"}>Merek</Th>
 									<Th textAlign={"center"}>Warna</Th>
-									<Th textAlign={"center"}>Persamaan Kalibrasi</Th>
+									<Th textAlign={'center'}>Persamaan Kalibrasi</Th>
 									<Th textAlign={"center"}>Range Min</Th>
 									<Th textAlign={"center"}>Range Max</Th>
 									<Th textAlign={"center"}>Aksi</Th>
@@ -179,7 +179,8 @@ useEffect(() => {
 													background={item.color}></Box>
 											</Td>
 											<Td textAlign={"center"} color={"var(--color-primer)"}>
-												{item.persamaan_kalibrasi}
+												{item.calibration}
+												
 											</Td>
 											<Td textAlign={"center"} color={"var(--color-primer)"}>
 												{item.range_min}

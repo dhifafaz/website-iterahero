@@ -33,10 +33,8 @@ const Controlling = () => {
 	};
 	const dispatch = useDispatch();
 	useEffect(() => {
+		dispatch(routePageName("Controlling"));
 		getApiGreenhouse();
-		return () => {
-			dispatch(routePageName("Controlling"));
-		};
 	}, []);
 	return (
 		<>

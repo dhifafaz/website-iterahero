@@ -43,11 +43,7 @@ const CardAktuator = (props) => {
 
     useEffect(() => {
       getPagination()
-      return () => {
-        
-        setIsLoading(true)
-        
-      };
+      setIsLoading(true)
     },[idApi]);
     return (
         <>
@@ -58,7 +54,7 @@ const CardAktuator = (props) => {
                 <Flex align={'center'} justify={'center'} mt={'30px'}>
                   <Wrap className='center-ul' align={'center'} spacing={'30px'} mt={'30px'}>
                     {dataTable.map((item, index) => (
-                      <Link to={`/unit/dashboard/aktuator/${item.id}`} >
+                      <Link to={`/unit/dashboard/aktuator/${item.id}`} key={index}>
                         <WrapItem className='hiya' key={index}
                           w={['sm']}
                           bg={'#ffff'}

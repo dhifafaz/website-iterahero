@@ -78,9 +78,7 @@ const GreenhouseAdd = () => {
     }
 
     useEffect(() => {
-        return () => {
-            dispatch(routePageName('Greenhouse'))
-        };
+        dispatch(routePageName('Greenhouse'))
     }, []);
 
     return (

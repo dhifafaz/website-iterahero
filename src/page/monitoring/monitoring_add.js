@@ -29,21 +29,13 @@ import {
 import axios from "axios";
 import Loading from "../../component/loading/loading";
 
-const schema = yup.object({
-	name: yup.string().required("Nama harus diisi"),
-	icon: yup.string().required("icon harus diisi"),
-	color: yup.string().required("Warna harus diisi"),
-	brand: yup.string().required("Satuan Ukur harus diisi"),
-	unit_measurement: yup.string().required("Merek harus diisi"),
-	range_max: yup.number().required("Range Max harus diisi"),
-	range_min: yup.number().required("Range Min harus diisi"),
-	id_category_sensor: yup.number().required("Kategori harus diisi"),
-	id_greenhouse: yup.number().required(""),
-});
 const Monitoring_Add = () => {
 	const navigate = useNavigate();
 	TabTitle("Tambah Sensor - ITERA Hero");
 	const { id } = useParams();
+
+	const [isloading, checkLoading] = useState(true);
+
 	const [dataApi, setDataApi] = useState(null);
 	const getDataApi = async () => {
 		axios
@@ -51,23 +43,33 @@ const Monitoring_Add = () => {
 				headers: {
 					Authorization: "Bearer " + localStorage.getItem("token"),
 				},
-			})
+			});
+	};
+
+	const schema = yup.object({
+		name: yup.string().required("Nama harus diisi"),
+		icon: yup.string().required("icon harus diisi"),
+		color: yup.string().required("Warna harus diisi"),
+		brand: yup.string().required("Satuan Ukur harus diisi"),
+		calibration: yup.string().required("Persamaan Kalibrasi harus diisi"),
+		unit_measurement: yup.string().required("Merek harus diisi"),
+		range_max: yup.number().required("Range Max harus diisi"),
+		range_min: yup.number().required("Range Min harus diisi"),
+		id_category_sensor: yup.number().required("Kategori harus diisi"),
+		id_greenhouse: yup.number().required(""),
+	});
+	const [iconsList, setIconsList] = useState(null);
+	const getIcon = async () => {
+		axios
+			.get(icons)
 			.then((response) => {
-				setDataApi(response.data.data);
+				// console.log("isi response", response);
+				setIconsList(response.data.data);
+				checkLoading(false);
 			})
 			.catch((error) => {
 				console.log(error);
 			});
-	};
-	const [iconsList, setIconsList] = useState('');
-	const getIcon = async () => {
-		axios.get(icons)
-		.then((response) => {
-			setIconsList(response.data.data);
-		})
-		.catch((error) => {	
-			console.log(error);
-		});
 	};
 	const [dataCategory, setDataCategory] = useState(null);
 	const header = localStorage.getItem("token");
@@ -89,17 +91,19 @@ const Monitoring_Add = () => {
 	const dispatch = useDispatch();
 
 	useEffect(() => {
+		dispatch(routePageName("Monitoring"));
 		getDataCategory();
 		getDataApi();
 		getIcon();
-		return () => {
-			dispatch(routePageName("Monitoring"));
-		};
+		checkLoading(true);
 	}, []);
 
 	return (
 		<>
-			{dataApi == null || dataCategory == null || icons == null ? (
+			{dataApi == null ||
+			dataCategory == null ||
+			iconsList == null ||
+			isloading ? (
 				<Loading />
 			) : (
 				<Flex w="100%" flexDir={"column"}>
@@ -154,6 +158,7 @@ const Monitoring_Add = () => {
 							icon: "",
 							color: "",
 							brand: "",
+							calibration: "",
 							unit_measurement: "",
 							range_max: "",
 							range_min: "",
@@ -166,6 +171,7 @@ const Monitoring_Add = () => {
 								submitedData.append("name", values.name);
 								submitedData.append("icon", values.icon);
 								submitedData.append("color", values.color);
+								submitedData.append("calibration", values.calibration);
 								submitedData.append("brand", values.brand);
 								submitedData.append(
 									"unit_measurement",
@@ -219,7 +225,7 @@ const Monitoring_Add = () => {
 										marginTop={"0 auto"}
 										type="text"
 										name="name"
-										value={values.name}
+										defaultValue={values.name}
 										onChange={handleChange}
 										onBlur={handleBlur}
 										variant="outline"
@@ -238,19 +244,20 @@ const Monitoring_Add = () => {
 											setIcon_selected(e.target.value);
 										}}
 										onBlur={handleBlur}
+										// defaultValue={values.icon}
 										value={values.icon}
 										name="icon"
 										id="icon">
-										<option value="" selected>
+										<option defaultValue="" selected>
 											Pilih Icon
 										</option>
-										{iconsList.map((item) => (
-											item.type =='sensor'? (
+										{iconsList.map((item) =>
+											item.type == "sensor" ? (
 												<option value={item.icon} color={"var(--color-primer)"}>
 													{item.name}
 												</option>
 											) : null
-										))}
+										)}
 									</Select>
 									<Flex m={"15px"}>
 										<Image src={icon_selected} />
@@ -271,19 +278,40 @@ const Monitoring_Add = () => {
 										onChange={handleChange}
 										onBlur={handleBlur}
 										variant="outline">
-										<option value="">Pilih Warna</option>
-										{iconsList.map((item) => (
-											item.type =='sensor' && item.icon == icon_selected? (
-												<option value={item.color} color={"var(--color-primer)"} selected>
+										<option defaultValue="">Pilih Warna</option>
+										{iconsList.map((item) =>
+											item.type == "sensor" && item.icon == icon_selected ? (
+												<option
+													value={item.color}
+													color={"var(--color-primer)"}
+													selected>
 													{item.name}
 												</option>
 											) : null
-										))}
+										)}
 									</Select>
 									<Flex m={"15px"}>
 										<Circle bg={values.color} size="30px" />
 									</Flex>
 									<FormErrorMessage>{errors.color}</FormErrorMessage>
+								</FormControl>
+								<FormControl
+									marginTop={"20px"}
+									isInvalid={errors.calibration && touched.calibration}>
+									<FormLabel color={"var(--color-primer)"}>Persamaan Kalibrasi</FormLabel>
+									<Input
+										color={"var(--color-primer)"}
+										maxWidth={"100%"}
+										marginTop={"0 auto"}
+										type="text"
+										name="calibration"
+										defaultValue={values.calibration}
+										onChange={handleChange}
+										onBlur={handleBlur}
+										variant="outline"
+										placeholder="Persamaan Kalibrasi..."
+									/>
+									<FormErrorMessage>{errors.calibration}</FormErrorMessage>
 								</FormControl>
 								<FormControl
 									marginTop={"20px"}
@@ -295,7 +323,7 @@ const Monitoring_Add = () => {
 										marginTop={"0 auto"}
 										type="text"
 										name="brand"
-										value={values.brand}
+										defaultValue={values.brand}
 										onChange={handleChange}
 										onBlur={handleBlur}
 										variant="outline"
@@ -317,7 +345,7 @@ const Monitoring_Add = () => {
 										marginTop={"0 auto"}
 										type="text"
 										name="unit_measurement"
-										value={values.unit_measurement}
+										defaultValue={values.unit_measurement}
 										onChange={handleChange}
 										onBlur={handleBlur}
 										variant="outline"
@@ -335,7 +363,7 @@ const Monitoring_Add = () => {
 										marginTop={"0 auto"}
 										type="number"
 										name="range_min"
-										value={values.range_min}
+										defaultValue={values.range_min}
 										onChange={handleChange}
 										onBlur={handleBlur}
 										variant="outline"
@@ -353,7 +381,7 @@ const Monitoring_Add = () => {
 										marginTop={"0 auto"}
 										type="number"
 										name="range_max"
-										value={values.range_max}
+										defaultValue={values.range_max}
 										onChange={handleChange}
 										onBlur={handleBlur}
 										variant="outline"
@@ -368,7 +396,7 @@ const Monitoring_Add = () => {
 									}>
 									<FormLabel color={"var(--color-primer)"}>Kategori</FormLabel>
 									<Select
-										value={values.id_category_sensor}
+										defaultValue={values.id_category_sensor}
 										color={"var(--color-primer)"}
 										onChange={handleChange}
 										onBlur={handleBlur}
@@ -387,7 +415,7 @@ const Monitoring_Add = () => {
 								<FormControl>
 									<Input
 										type="hidden"
-										value={id}
+										defaultValue={id}
 										name="id_greenhouse"
 										onChange={handleChange}
 										onBlur={handleBlur}

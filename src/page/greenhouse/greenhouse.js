@@ -37,10 +37,8 @@ const GreenHouse = () => {
 	}
 
 	useEffect(() => {
+		dispatch(routePageName("Greenhouse"));
 		getListGreenhouse()
-		return () => {
-			dispatch(routePageName("Greenhouse"));
-		};
 	}, []);
 
 	return (

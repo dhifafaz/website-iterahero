@@ -56,10 +56,19 @@ const Login = () => {
       <Flex flexDir={'column'} backgroundColor={"var(--color-on-primary)"} width='100%' height="100%" alignItems='center' justifyContent='center' display={{ base: 'none', md: 'none', lg: 'flex' }}>
         <Image position={'Relative'} width={'80%'} maxWidth={'400px'} src="https://res.cloudinary.com/diyu8lkwy/image/upload/v1664911531/itera%20herro%20icon/Frame_245_3_nvtrkl.png" />
         <Text p={3} fontWeight={'semibold'} fontFamily={'var(--font-family-secondary)'} fontSize={'var(--header-3)'} color={'{var(--color-primer)}'} >Kerjasama ITERA dan PT. Kharisma Agri Inovasi</Text>
+        <Image
+						  width={"25%"}
+							position={'Relative'} maxWidth={'350px'} 
+							src="https://res.cloudinary.com/diyu8lkwy/image/upload/v1663542541/itera%20herro%20icon/Frame_181_fmtxbh.png"
+						/>
       </Flex>
       <Flex backgroundColor={{ lg: "var(--color-primer)" }} width='100%' height="100%" alignItems={{ lg: 'center' }} justifyContent='center'>
         <Box max-width='649px' borderRadius={'20px'} display="flex" gap="40px" flexDirection={"column"} size={'md'} width={{ base: '100%', md: '80%' }} padding="90px 50px 90px 50px" backgroundColor={"var(--color-on-primary)"} justifyContent={{ lg: 'center' }} textAlign='center' alignItems='center'>
           <Image sizes="md" display={{ base: 'flex', lg: 'none' }} position={'Relative'} width={'80%'} maxWidth={'200px'} src="https://res.cloudinary.com/diyu8lkwy/image/upload/v1664911531/itera%20herro%20icon/Frame_245_3_nvtrkl.png" />
+          <Image
+						  sizes="md" display={{ base: 'flex', lg: 'none' }} position={'Relative'} width={'80%'} maxWidth={'200px'}
+							src="https://res.cloudinary.com/diyu8lkwy/image/upload/v1663542541/itera%20herro%20icon/Frame_181_fmtxbh.png"
+						/>
           <Text size='md' fontWeight='bold' fontFamily='var(--font-family-secondary)' fontSize='var(--header-2)' color='var(--color-primer)' >Masuk</Text>
           <Formik
             initialValues={{ email: '', password: '' }}
@@ -124,7 +133,7 @@ const Login = () => {
                   height="50px"
                   borderRadius="10px"
                   backgroundColor="var(--color-primer)"
-
+									loadingText="Tunggu Sebentar..."
                   type="submit"
                   className="btn-login"
                   onClick={() => {

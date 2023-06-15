@@ -40,10 +40,8 @@ const Monitoring = () => {
 	};
 	const dispatch = useDispatch();
 	useEffect(() => {
+		dispatch(routePageName("Monitoring"));
 		getApiGreenhouse();
-		return () => {
-			dispatch(routePageName("Monitoring"));
-		};
 	}, []);
 	return (
 		<>

@@ -9,8 +9,8 @@ import { routePageName } from "../../redux/action";
 import { TabTitle } from "../../Utility/utility";
 import axios from "axios";
 import Loading from "../../component/loading/loading";
-import { dashboardApi,greenhouseByUserId,paginationMonitoring } from "../../Utility/api_link";
-import { Link, useNavigate } from "react-router-dom";
+import { dashboardApi,greenhouseByUserId } from "../../Utility/api_link";
+import { useNavigate } from "react-router-dom";
 import { Formik } from "formik";
 import dashboardMenu from "../../Utility/dashboard_menu";
 import CardSensor from "../../component/card_sensor/card_sensor";
@@ -54,11 +54,9 @@ const Dashboard = () => {
 }
 
 	useEffect(() => {
+		dispatch(routePageName("Dashboard"));
 		getApiGreenhouse()
 		getApiDashboard()
-		return () => {
-			dispatch(routePageName("Dashboard"));
-		};
 	}, []);
 
 	return (

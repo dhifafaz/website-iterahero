@@ -32,12 +32,11 @@ const Notification = () => {
 				navigate("/login");
 			});
 	};
+	console.log(dataNotification)
 
 	useEffect(() => {
+		dispatch(routePageName("History Notification"));
 		getNotificationData();
-		return () => {
-			dispatch(routePageName("History Notification"));
-		};
 	}, []);
 
 	return (

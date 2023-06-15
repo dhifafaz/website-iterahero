@@ -11,7 +11,6 @@ import useSound from 'use-sound';
 import clickSound from '../../assets/switch.mp3';
 import { postLogAktuator,Status } from "../..//Utility/api_link";
 import Loading from "../../component/loading/loading";
-import { useNavigate } from "react-router-dom";
 import { Switch } from '@chakra-ui/react'
 import './value_aktuator.css';
 
@@ -58,7 +57,6 @@ const ValueAktuator = (props) => {
         id_actuator:idApi,
         on_off_status: 0})
         .then(response => {
-          console.log(response)
           setIsLoading(false)
           setStatus(replace => !replace)
         })
@@ -70,7 +68,6 @@ const ValueAktuator = (props) => {
           id_actuator:idApi,
           on_off_status: 1})
           .then(response => {
-            console.log(response)
             setIsLoading(false)
             setStatus(replace => !replace)
           })
@@ -78,10 +75,9 @@ const ValueAktuator = (props) => {
     }
   }
     useEffect(() => {
-      return () => {
-        setIsLoading(true)
-        onlineStatus()
-      };
+      setIsLoading(true)
+      onlineStatus()
+
     },[idApi,status]);
   return (
   <>
