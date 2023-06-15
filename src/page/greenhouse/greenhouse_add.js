@@ -29,8 +29,6 @@ const GreenhouseAdd = () => {
 
     const navigate = useNavigate()
 
-
-
     const schema = yup.object({
         name: yup.string().required("data harus diisi"),
         location: yup.string().required("data harus diisi"),

@@ -8,8 +8,8 @@ import { useNavigate } from "react-router";
 import { getActuatorDetail } from "../../Utility/api_link";
 import dashboardControlMenu from "../../Utility/dashboard_control_menu";
 import CardLogActuator from "../../component/card_log_actuator/card_log_act";
-import CardSensor from "../../component/card_sensor/card_sensor";
-import CardLogActuatorToday from "../../component/card_log_actuator/today_card_log_act";
+import CardAutomation from "../../component/card Automation/card_automation";
+import AutomationList from "./automation_list";
 
 
 const Automation = () => {
@@ -114,7 +114,7 @@ const Automation = () => {
           <Flex w={['100%']}>
               <Wrap justify={'center'} mt={'30px'} w={['100%']}>
                 {
-                selected === 1? <CardLogActuatorToday data={{id : id}}/>:  <CardLogActuator data={{id : id}}/>
+                selected === 1? <AutomationList data={{id : id}}/>:  <CardLogActuator data={{id : id}}/>
                 }
               </Wrap>
             </Flex>

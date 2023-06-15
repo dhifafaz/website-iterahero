@@ -46,4 +46,6 @@ export const icons = `${base_url}/api/v1/icon`;
 export const Status =
 	`${base_url}/api/v1/actuator-broker?id_actuator=`;
 export const actuatorLogToday = 
-`${base_url}/api/v1/actuator-log-today/`
+`${base_url}/api/v1/actuator-log-today/`;
+export const getAutomationByActuator = 
+`${base_url}/api/v1/automation?id_actuator=`;

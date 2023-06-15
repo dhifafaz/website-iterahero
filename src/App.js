@@ -21,6 +21,7 @@ import Controlling_Edit from "./page/controlling/controlling_edit";
 import MoreNotification from "./page/notification/more_notification";
 import Automation from "./page/automation/automation";
 import Grafik from "./page/grafik/grafik";
+import AutomationAdd from "./page/automation/automation_add";
 
 function App() {
 	return (
@@ -46,6 +47,7 @@ function App() {
 				<Route path="controlling/edit/:id" element={<Controlling_Edit />} />
 				<Route path="controlling/edit/:id" element={<Controlling_Edit />} />
 				<Route path="dashboard/aktuator/:id" element={<Automation />} />
+				<Route path="dashboard/aktuator/automation/add" element={<AutomationAdd />} />
 			</Route>
 		</Routes>
 	);
