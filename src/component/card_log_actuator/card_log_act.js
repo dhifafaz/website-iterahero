@@ -79,7 +79,7 @@ const CardLogActuator = (props) => {
 												borderRadius={'10px'}
 												border={'1px solid #E2E8F0'}
 												padding={'10px'}>
-												<Flex alignItems={'center'} justifyContent={'space-between'} w={['100%']}>
+												<Flex alignItems={'center'} justifyContent={'space-between'} w={['100%']} direction={{ base: 'column', md: 'row' }}>
 													<Flex>
 														<Wrap padding={'10px'} w={'60px'}>
 															<Image classNameName='Image' w={['100%']} h={['100%']}src={item.on_off_status == 0 ? '/off_log.png' : '/on_log.png'} alt="image" />

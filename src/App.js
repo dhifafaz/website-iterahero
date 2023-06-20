@@ -22,6 +22,7 @@ import MoreNotification from "./page/notification/more_notification";
 import Automation from "./page/automation/automation";
 import Grafik from "./page/grafik/grafik";
 import AutomationAdd from "./page/automation/automation_add";
+import AutomationEdit from "./page/automation/automation_edit";
 
 function App() {
 	return (
@@ -47,7 +48,8 @@ function App() {
 				<Route path="controlling/edit/:id" element={<Controlling_Edit />} />
 				<Route path="controlling/edit/:id" element={<Controlling_Edit />} />
 				<Route path="dashboard/aktuator/:id" element={<Automation />} />
-				<Route path="dashboard/aktuator/automation/add" element={<AutomationAdd />} />
+				<Route path="dashboard/aktuator/automation/add/:id" element={<AutomationAdd />} />
+				<Route path="dashboard/aktuator/automation/edit/:id" element={<AutomationEdit />} />
 			</Route>
 		</Routes>
 	);
