@@ -47,23 +47,18 @@ const ValueSensor = (props) => {
   const [valueSensor, setValueSensor] = useState(0);
   const [time, setTime] = useState("");
   const [status, setStatus] = useState("");
-  const [client, setclient] = useState(null);
-  const connect = () => {
-    if (client == null) {
-      const clientConnect = mqtt.connect(host, option);
-      setclient(clientConnect);
-    }
-  };
-  const getData = async () => {
+
+  useEffect(() => {
+    const client = mqtt.connect(host, option);
     if (client) {
-      await client.on("connect", () => {
+      client.on("connect", () => {
         console.log("test");
         client.subscribe("iterahero/test");
       });
-      await client.on("message", async (topic, message) => {
+      client.on("message", async (topic, message) => {
         let parsing = await JSON.parse(message.toString());
         const date = new Date();
-        parsing.map(async (data) => {
+        parsing.map((data) => {
           if (data.id_sensor == idSensor) {
             setValueSensor(data.value);
             setStatus(data.status);
@@ -72,21 +67,10 @@ const ValueSensor = (props) => {
         });
       });
     }
-  };
-  const disconnect = () => {
-    if (client) {
-      client.end();
-    }
-  };
-
-  useEffect(() => {
-    connect();
-    getData();
-
     return () => {
-      disconnect();
+      client.end();
     };
-  }, [client]);
+  }, []);
 
   return (
     <>
