@@ -39,3 +39,5 @@ export const getAutomationByActuator = `${base_url}/api/v1/automation?id_actuato
 export const addAutomation = `${base_url}/api/v1/automation`;
 export const deleteAutomation = `${base_url}/api/v1/automation/`;
 export const apiGetAutomation = `${base_url}/api/v1/automation/`;
+
+export const scheduling = `${base_url}/api/v1/schedule`;

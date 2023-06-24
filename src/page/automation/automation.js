@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Text, Button, Flex, Wrap } from "@chakra-ui/react";
+import { Text, Button, Flex, Wrap, WrapItem } from "@chakra-ui/react";
 import { Link, useParams } from "react-router-dom";
 import axios from "axios";
 import Loading from "../../component/loading/loading";
@@ -10,7 +10,6 @@ import dashboardControlMenu from "../../Utility/dashboard_control_menu";
 import CardLogActuator from "../../component/card_log_actuator/card_log_act";
 import CardAutomation from "../../component/card Automation/card_automation";
 import AutomationList from "./automation_list";
-
 
 const Automation = () => {
   TabTitle("Detail Actuator - ITERA Hero");
@@ -53,26 +52,38 @@ const Automation = () => {
           <Flex bg="white" borderRadius="10px" p="10px">
             <Flex>
               <Link to="/unit/dashboard">
-                <Text fontSize="20px" fontWeight="bold" mr="10px">
+                <Text
+                  fontSize={{ base: "15px", md: "20px" }}
+                  fontWeight="bold"
+                  mr="10px"
+                >
                   Dashboard
                 </Text>
               </Link>
             </Flex>
             <Flex>
-              <Text fontSize="20px" fontWeight="bold" mr="10px">
+              <Text
+                fontSize={{ base: "15px", md: "20px" }}
+                fontWeight="bold"
+                mr="10px"
+              >
                 {">"}
               </Text>
             </Flex>
-            <Text fontSize="20px" fontWeight="bold" mb="10px">
+            <Text
+              fontSize={{ base: "15px", md: "20px" }}
+              fontWeight="bold"
+              mb="10px"
+            >
               {"Aktuator " + dataApi}
             </Text>
           </Flex>
           <Flex>
             <Flex width={"100%"}>
-              <Wrap flexDir={"row"}>
+              <Wrap>
                 {dashboardControlMenu.map((item, index) => {
                   return (
-                    <Flex key={index} width={"169px"} height={"44px"}>
+                    <WrapItem key={index} width={"169px"} height={"44px"}>
                       <Button
                         onClick={() => setSelected(item.id)}
                         w="100%"
@@ -105,19 +116,26 @@ const Automation = () => {
                           {item.name}
                         </Text>
                       </Button>
-                    </Flex>
+                    </WrapItem>
                   );
                 })}
               </Wrap>
             </Flex>
           </Flex>
-          <Flex w={['100%']}>
-              <Wrap justify={'center'} mt={'30px'} w={['100%']}>
-                {
-                selected === 1? <AutomationList data={{id : id}}/>:  <CardLogActuator data={{id : id}}/>
-                }
-              </Wrap>
-            </Flex>
+          <Flex w={["100%"]} h={["100%"]}>
+            <Wrap
+              justify={"center"}
+              mt={"30px"}
+              w={["100%"]}
+              h={["fit-content"]}
+            >
+              {selected === 1 ? (
+                <AutomationList data={{ id: id }} />
+              ) : (
+                <CardLogActuator data={{ id: id }} />
+              )}
+            </Wrap>
+          </Flex>
         </>
       )}
     </>

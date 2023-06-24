@@ -1,7 +1,4 @@
-
-const TabTitle =  (newtitle) => {
-	return ( document.title = newtitle )
-}
-export {
-  TabTitle,
-}
+const TabTitle = (newtitle) => {
+  return (document.title = newtitle);
+};
+export { TabTitle };

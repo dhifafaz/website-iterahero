@@ -15,15 +15,18 @@ import { useNavigate } from "react-router-dom";
 import {
   getActuatorDetail,
   getAutomationByActuator,
+  scheduling,
   updateActuatorDetail,
 } from "../../Utility/api_link";
 import CardAutomation from "../../component/card Automation/card_automation";
+import CardScheduling from "../../component/card Automation/card_scheduling";
 
 const AutomationList = (props) => {
   const idApi = props.data.id;
   const header = localStorage.getItem("token");
   const navigate = useNavigate();
   const [dataApi, setDataApi] = useState([]);
+  const [dataSchedule, setDataSchedule] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [status, setStatus] = useState(0);
 
@@ -51,6 +54,21 @@ const AutomationList = (props) => {
       })
       .then((response) => {
         setStatus(response.data.data.automation);
+      })
+      .catch((error) => {
+        localStorage.clear();
+        navigate("/login");
+      });
+  };
+  const getSchedule = async () => {
+    await axios
+      .get(`${scheduling}?status=1`, {
+        headers: {
+          Authorization: "Bearer " + header,
+        },
+      })
+      .then((response) => {
+        setDataSchedule(response.data.data);
       })
       .catch((error) => {
         localStorage.clear();
@@ -105,6 +123,7 @@ const AutomationList = (props) => {
   useEffect(() => {
     getAutomation();
     getActuatorAutomation();
+    getSchedule();
   }, [idApi, status]);
 
   return (
@@ -112,7 +131,7 @@ const AutomationList = (props) => {
       {dataApi == null || isLoading ? (
         <Loading />
       ) : (
-        <Wrap w={["100%"]} margin={"0px"}>
+        <Flex flexDir={"column"} w={"100%"}>
           <FormControl
             display="flex"
             alignItems="center"
@@ -152,7 +171,7 @@ const AutomationList = (props) => {
               </Link>
             </Flex>
           </Flex>
-          <Flex direction={"column"} w={["100%"]} margin={"0px"}>
+          <Wrap>
             {dataApi.map((data) => (
               <CardAutomation
                 data={{
@@ -166,8 +185,23 @@ const AutomationList = (props) => {
               />
             ))}
             ;
-          </Flex>
-        </Wrap>
+          </Wrap>
+          <Wrap>
+            {dataSchedule.map((data) => (
+              <CardScheduling
+                data={{
+                  actuator: data.actuator,
+                  interval: data.interval,
+                  repeat: data.repeat,
+                  duration: data.duration,
+                  start: data.start,
+                  id_schedule: data.id_schedule,
+                }}
+              />
+            ))}
+            ;
+          </Wrap>
+        </Flex>
       )}
     </>
   );
