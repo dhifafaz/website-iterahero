@@ -81,6 +81,7 @@ const CardAktuator = (props) => {
                             data={{
                               id: item.id,
                               life_cycle: item.status_lifecycle,
+                              automation: item.automation,
                             }}
                           />
                         </Link>

@@ -11,6 +11,7 @@ import "./value_aktuator.css";
 const ValueAktuator = (props) => {
   const idApi = props.data.id;
   const life_cycle = props.data.life_cycle;
+  const automation = props.data.automation;
   const [isLoading, setIsLoading] = useState(false);
   const [playbackRate, setPlaybackRate] = useState(0.75);
   const [play] = useSound(clickSound, {
@@ -70,6 +71,7 @@ const ValueAktuator = (props) => {
       }, 200);
     }
   };
+
   useEffect(() => {
     setIsLoading(true);
     onlineStatus();
@@ -85,7 +87,13 @@ const ValueAktuator = (props) => {
               className="Image"
               w={"180px"}
               h={"auto"}
-              src={status == 0 ? "/Off.png" : "/On.png"}
+              src={
+                automation == 0
+                  ? status == 0
+                    ? "/Off.png"
+                    : "/On.png"
+                  : "/automation.png"
+              }
               alt="image"
               boxSize="100px"
             />
@@ -119,21 +127,28 @@ const ValueAktuator = (props) => {
           >
             <Stack align="center" onClick={play} className="touchable">
               {isLoading ? (
-                <Switch
-                  colorScheme="green"
-                  size="lg"
-                  onChange={() => {
-                    setIsLoading(true);
-                    toogleSwitch();
-                  }}
-                  value={status}
-                  isChecked={status == 1}
-                  isDisabled={
-                    isOn == "offline" || isOn == undefined || isOn == ""
-                      ? true
-                      : false
-                  }
-                />
+                automation == 0 ? (
+                  <Switch
+                    colorScheme="green"
+                    size="lg"
+                    onChange={() => {
+                      setIsLoading(true);
+                      toogleSwitch();
+                    }}
+                    value={status}
+                    isChecked={status == 1}
+                    isDisabled={
+                      isOn == "offline" ||
+                      isOn == undefined ||
+                      isOn == "" ||
+                      automation == 0
+                        ? true
+                        : false
+                    }
+                  />
+                ) : (
+                  <Text color={"var(--color-error)"}>Automation</Text>
+                )
               ) : null}
             </Stack>
           </FormControl>

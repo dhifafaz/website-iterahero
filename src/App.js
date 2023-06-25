@@ -23,6 +23,7 @@ import Automation from "./page/automation/automation";
 import Grafik from "./page/grafik/grafik";
 import AutomationAdd from "./page/automation/automation_add";
 import AutomationEdit from "./page/automation/automation_edit";
+import ScheduleEdit from "./page/automation/scheduling_edit";
 function App() {
   return (
     <Routes>
@@ -50,6 +51,10 @@ function App() {
         <Route
           path="dashboard/aktuator/automation/add/:id"
           element={<AutomationAdd />}
+        />
+        <Route
+          path="dashboard/aktuator/schedule/edit/:id"
+          element={<ScheduleEdit />}
         />
         <Route
           path="dashboard/aktuator/automation/edit/:id"

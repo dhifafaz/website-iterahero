@@ -20,7 +20,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { RiDeleteBinFill, RiPencilFill } from "react-icons/ri";
-import { deleteAutomation, scheduling } from "../../Utility/api_link";
+import { scheduling } from "../../Utility/api_link";
 
 const CardScheduling = (props) => {
   const item = props.data;
@@ -127,7 +127,7 @@ const CardScheduling = (props) => {
                 <Link
                   className="touch"
                   to={{
-                    pathname: `/unit/dashboard/aktuator/automation/edit/${item.id_schedule}`,
+                    pathname: `/unit/dashboard/aktuator/schedule/edit/${item.id_schedule}`,
                   }}
                 >
                   <Icon
