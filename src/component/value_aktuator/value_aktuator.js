@@ -163,12 +163,13 @@ const ValueAktuator = (props) => {
           <Link to={`/unit/dashboard/aktuator/${idApi}`} className="touchable">
             <Flex
               w={"100%"}
-              h={"100%"}
+              h={"40px"}
               alignItems={"center"}
               justifyContent={"center"}
               backgroundColor={"#09322D"}
               borderRadius={"34px"}
-              p={"5px"}
+              paddingRight={"10px"}
+              paddingLeft={"10px"}
             >
               <Text color={"white"}>Pengaturan</Text>
               <Icon
@@ -176,6 +177,7 @@ const ValueAktuator = (props) => {
                 size={"100%"}
                 color={"#FFFFFF"}
                 marginRight={"5px"}
+                marginLeft={"-10px"}
               />
             </Flex>
           </Link>

@@ -10,6 +10,7 @@ import {
   FormLabel,
   Select,
   Circle,
+  Textarea,
 } from "@chakra-ui/react";
 
 import { useParams } from "react-router";
@@ -33,7 +34,8 @@ const Monitoring_Add = () => {
   const navigate = useNavigate();
   TabTitle("Tambah Sensor - ITERA Hero");
   const { id } = useParams();
-
+  const [imageSensor, onChangeImageSensor] = useState(null);
+  const [imagePos, onChangeImagePos] = useState(null);
   const [isloading, checkLoading] = useState(true);
 
   const [dataApi, setDataApi] = useState(null);
@@ -63,6 +65,9 @@ const Monitoring_Add = () => {
     range_max: yup.number().required("Range Max harus diisi"),
     range_min: yup.number().required("Range Min harus diisi"),
     id_category_sensor: yup.number().required("Kategori harus diisi"),
+    detail: yup.string().required("Kategori harus diisi"),
+    sensor_image: yup.object().required("Kategori harus diisi"),
+    posisition: yup.object().required("Kategori harus diisi"),
     id_greenhouse: yup.number().required(""),
   });
   const [iconsList, setIconsList] = useState(null);
@@ -175,6 +180,9 @@ const Monitoring_Add = () => {
               range_min: "",
               id_category_sensor: "",
               id_greenhouse: id,
+              detail: "",
+              sensor_image: {},
+              posisition: {},
             }}
             onSubmit={(values, { setSubmitting }) => {
               setTimeout(() => {
@@ -194,13 +202,15 @@ const Monitoring_Add = () => {
                   "id_category_sensor",
                   values.id_category_sensor
                 );
+                submitedData.append("detail", values.detail);
+                submitedData.append("sensor_image", imageSensor);
+                submitedData.append("posisition", imagePos);
                 submitedData.append("id_greenhouse", values.id_greenhouse);
                 axios
-                  .post(addSensorApi, values, {
+                  .post(addSensorApi, submitedData, {
                     headers: {
                       Authorization: "Bearer " + localStorage.getItem("token"),
-                      Accept: "application/json, text/plain, */*",
-                      "Content-Type": "application/json",
+                      "content-type": "multipart/form-data",
                     },
                   })
                   .then((response) => {
@@ -438,6 +448,97 @@ const Monitoring_Add = () => {
                   <FormErrorMessage>
                     {errors.id_category_sensor}
                   </FormErrorMessage>
+                </FormControl>
+                <FormControl
+                  marginTop={"20px"}
+                  isInvalid={errors.detail && touched.detail}
+                >
+                  <FormLabel color={"var(--color-primer)"}>
+                    Detail dari Sensor
+                  </FormLabel>
+                  <Textarea
+                    color={"var(--color-primer)"}
+                    maxWidth={"100%"}
+                    marginTop={"0 auto"}
+                    type="text"
+                    name="detail"
+                    defaultValue={values.detail}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    variant="outline"
+                    placeholder="detail sensor..."
+                  />
+                  <FormErrorMessage>{errors.range_min}</FormErrorMessage>
+                </FormControl>
+                <FormControl
+                  marginTop={"20px"}
+                  isInvalid={errors.sensor_image && touched.sensor_image}
+                >
+                  <FormLabel htmlFor="sensor_image" color={"black"}>
+                    Gambar Sensor
+                  </FormLabel>
+                  <Flex
+                    width={"100%"}
+                    h="100px"
+                    borderRadius={"5px"}
+                    maxWidth={"100%"}
+                    marginTop={"0 auto"}
+                    variant="outline"
+                    placeholder="Masukkan Gambar"
+                    color={"black"}
+                    alignItems="center"
+                    borderWidth="1px"
+                    borderColor={"#D9D9D9"}
+                    padding={"20px"}
+                  >
+                    {/* <FilePicker
+                                            onFileChange={(fileList) => onChangeImage(fileList)}
+                                            placeholder="Pilih Gambar"
+                                            clearButtonLabel="Hapus"
+                                            multipleFiles={true}
+                                            accept="image/*"
+                                            hideClearButton={false}
+                                        /> */}
+                    <input
+                      type="file"
+                      accept="image/*"
+                      onChange={(e) => {
+                        onChangeImageSensor(e.target.files[0]);
+                      }}
+                    />
+                  </Flex>
+                  <FormErrorMessage>{errors.sensor_image}</FormErrorMessage>
+                </FormControl>
+                <FormControl
+                  marginTop={"20px"}
+                  isInvalid={errors.posisition && touched.posisition}
+                >
+                  <FormLabel htmlFor="posisition" color={"black"}>
+                    Denah Posisi Sensor
+                  </FormLabel>
+                  <Flex
+                    width={"100%"}
+                    h="100px"
+                    borderRadius={"5px"}
+                    maxWidth={"100%"}
+                    marginTop={"0 auto"}
+                    variant="outline"
+                    placeholder="Masukkan Posisi Sensor"
+                    color={"black"}
+                    alignItems="center"
+                    borderWidth="1px"
+                    borderColor={"#D9D9D9"}
+                    padding={"20px"}
+                  >
+                    <input
+                      type="file"
+                      accept="image/*"
+                      onChange={(e) => {
+                        onChangeImagePos(e.target.files[0]);
+                      }}
+                    />
+                  </Flex>
+                  <FormErrorMessage>{errors.posisition}</FormErrorMessage>
                 </FormControl>
                 <FormControl>
                   <Input

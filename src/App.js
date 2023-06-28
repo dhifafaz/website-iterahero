@@ -24,6 +24,8 @@ import Grafik from "./page/grafik/grafik";
 import AutomationAdd from "./page/automation/automation_add";
 import AutomationEdit from "./page/automation/automation_edit";
 import ScheduleEdit from "./page/automation/scheduling_edit";
+import MonitoringDetail from "./page/monitoring/monitoring_detail";
+import ControllingDetail from "./page/controlling/Controlling_detail";
 function App() {
   return (
     <Routes>
@@ -56,6 +58,13 @@ function App() {
           path="dashboard/aktuator/schedule/edit/:id"
           element={<ScheduleEdit />}
         />
+        <Route
+          path="dashboard/aktuator/automation/edit/:id"
+          element={<AutomationEdit />}
+        />
+
+        <Route path="monitoring/detail/:id" element={<MonitoringDetail />} />
+        <Route path="controlling/detail/:id" element={<ControllingDetail />} />
         <Route
           path="dashboard/aktuator/automation/edit/:id"
           element={<AutomationEdit />}

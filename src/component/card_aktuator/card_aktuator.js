@@ -42,20 +42,15 @@ const CardAktuator = (props) => {
         <Loading />
       ) : (
         <Flex>
-          <Flex align={"center"} justify={"center"} mt={"30px"}>
-            <Wrap
-              className="center-ul"
-              align={"center"}
-              spacing={"30px"}
-              mt={"30px"}
-            >
+          <Flex align={"center"} justify={"center"} mt={"20px"}>
+            <Wrap className="center-ul" align={"center"} spacing={"30px"}>
               {dataTable.map((item, index) => (
                 <WrapItem
                   className="hiya"
                   key={index}
                   w={{ base: "90vw", md: "sm" }}
                   h={"100%"}
-                  minH={"430px"}
+                  minH={"450px"}
                   bg={"#ffff"}
                   borderRadius={"10px"}
                   border={"1px solid #E2E8F0"}
@@ -66,8 +61,17 @@ const CardAktuator = (props) => {
                   flexDir={"row"}
                 >
                   <Center data={{ data: idApi }} flexDir={"column"}>
-                    <Flex flexDir={"row"} justify={"space-between"}>
-                      <Image size={5} src={`${item.icon}`} color={item.color} />
+                    <Flex
+                      flexDir={"row"}
+                      justify={"space-between"}
+                      alignItems={"center"}
+                    >
+                      <Image
+                        w={"24px"}
+                        h={"24px"}
+                        src={`${item.icon}`}
+                        color={item.color}
+                      />
                       <Text color={`${item.color}`}>{item.name}</Text>
                     </Flex>
                     <Flex

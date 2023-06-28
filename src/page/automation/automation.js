@@ -49,8 +49,14 @@ const Automation = () => {
         <Loading />
       ) : (
         <>
-          <Flex bg="white" borderRadius="10px" p="10px">
-            <Flex>
+          <Flex
+            bg="white"
+            borderRadius="10px"
+            p="10px"
+            alignItems={"center"}
+            justifyContent={"start"}
+          >
+            <Flex alignItems={"center"}>
               <Link to="/unit/dashboard">
                 <Text
                   fontSize={{ base: "15px", md: "20px" }}
@@ -61,7 +67,7 @@ const Automation = () => {
                 </Text>
               </Link>
             </Flex>
-            <Flex>
+            <Flex alignItems={"center"}>
               <Text
                 fontSize={{ base: "15px", md: "20px" }}
                 fontWeight="bold"
@@ -70,11 +76,7 @@ const Automation = () => {
                 {">"}
               </Text>
             </Flex>
-            <Text
-              fontSize={{ base: "15px", md: "20px" }}
-              fontWeight="bold"
-              mb="10px"
-            >
+            <Text fontSize={{ base: "15px", md: "20px" }} fontWeight="bold">
               {"Aktuator " + dataApi}
             </Text>
           </Flex>
