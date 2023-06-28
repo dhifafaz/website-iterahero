@@ -102,7 +102,7 @@ const SchedulingAdd = (props) => {
       )
       .then((response) => {
         setIsLoading(false);
-        navigate(`/unit/dashboard/aktuator/${id}`);
+        navigate(`/unit/dashboard/aktuator/${valueActuator}`);
       })
       .catch((error) => {
         console.log(error);

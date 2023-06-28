@@ -1,5 +1,5 @@
 // const base_url = "https://iterahero.fly.dev";
-const base_url = "https://iterahero.fly.dev";
+const base_url = "http://localhost:8080";
 export const loginApi = `${base_url}/api/v1/login`;
 export const dashboardApi = `${base_url}/api/v1/dashboard`;
 export const greenhouseByUserId = `${base_url}/api/v1/greenhouse`;
@@ -41,3 +41,6 @@ export const deleteAutomation = `${base_url}/api/v1/automation/`;
 export const apiGetAutomation = `${base_url}/api/v1/automation/`;
 
 export const scheduling = `${base_url}/api/v1/schedule`;
+
+export const summary = `${base_url}/api/v1/summary`;
+export const downloadSummary = `${base_url}/api/v1/download_summary`;

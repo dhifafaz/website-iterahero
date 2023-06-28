@@ -94,7 +94,7 @@ const ScheduleEdit = () => {
       )
       .then((response) => {
         setIsLoading(false);
-        navigate(`/unit/dashboard/aktuator/${id}`);
+        navigate(`/unit/dashboard/aktuator/${valueActuator}`);
       })
       .catch((error) => {
         console.log(error);
@@ -133,7 +133,7 @@ const ScheduleEdit = () => {
         <Flex w="100%" h={["100%"]} flexDir={"column"}>
           <Formik
             initialValues={{
-              id_actuator: id,
+              id_actuator: dataSchedule.id_actuator,
               start: dataSchedule.start,
               duration: dataSchedule.duration,
               repeat: dataSchedule.repeat,

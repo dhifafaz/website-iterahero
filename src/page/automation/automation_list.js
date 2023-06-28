@@ -62,7 +62,7 @@ const AutomationList = (props) => {
   };
   const getSchedule = async () => {
     await axios
-      .get(`${scheduling}?status=1`, {
+      .get(`${scheduling}?actuatorid=${idApi}`, {
         headers: {
           Authorization: "Bearer " + header,
         },

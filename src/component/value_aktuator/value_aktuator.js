@@ -1,5 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { Text, FormControl, Image, Flex, Stack } from "@chakra-ui/react";
+import {
+  Text,
+  FormControl,
+  Image,
+  Flex,
+  Stack,
+  Icon,
+  Wrap,
+} from "@chakra-ui/react";
+import { Link } from "react-router-dom";
 import axios from "axios";
 import useSound from "use-sound";
 import clickSound from "../../assets/switch.mp3";
@@ -7,6 +16,7 @@ import { postLogAktuator, Status } from "../..//Utility/api_link";
 import Loading from "../../component/loading/loading";
 import { Switch } from "@chakra-ui/react";
 import "./value_aktuator.css";
+import { RiArrowRightSLine } from "react-icons/ri";
 
 const ValueAktuator = (props) => {
   const idApi = props.data.id;
@@ -138,10 +148,7 @@ const ValueAktuator = (props) => {
                     value={status}
                     isChecked={status == 1}
                     isDisabled={
-                      isOn == "offline" ||
-                      isOn == undefined ||
-                      isOn == "" ||
-                      automation == 0
+                      isOn == "offline" || isOn == undefined || isOn == ""
                         ? true
                         : false
                     }
@@ -152,6 +159,26 @@ const ValueAktuator = (props) => {
               ) : null}
             </Stack>
           </FormControl>
+          <br></br>
+          <Link to={`/unit/dashboard/aktuator/${idApi}`} className="touchable">
+            <Flex
+              w={"100%"}
+              h={"100%"}
+              alignItems={"center"}
+              justifyContent={"center"}
+              backgroundColor={"#09322D"}
+              borderRadius={"34px"}
+              p={"5px"}
+            >
+              <Text color={"white"}>Pengaturan</Text>
+              <Icon
+                as={RiArrowRightSLine}
+                size={"100%"}
+                color={"#FFFFFF"}
+                marginRight={"5px"}
+              />
+            </Flex>
+          </Link>
         </>
       )}
     </>

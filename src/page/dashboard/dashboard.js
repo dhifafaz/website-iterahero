@@ -57,7 +57,10 @@ const Dashboard = () => {
           Authorization: "Bearer " + header,
         },
       })
-      .then((response) => setDataGreenhouse(response.data.data))
+      .then((response) => {
+        setDataGreenhouse(response.data.data);
+        setData(response.data.data[0].id);
+      })
       .catch((error) => {
         localStorage.clear();
         navigate("/login");
@@ -164,7 +167,7 @@ const Dashboard = () => {
             <Flex width={"30%"}>
               <Formik
                 initialValues={{
-                  greenhouse: "",
+                  greenhouse: dataGreenhouse[0].id,
                 }}
                 onSubmit={(values) => {
                   setData(values.greenhouse);
@@ -205,7 +208,16 @@ const Dashboard = () => {
                           _focusWithin={{ borderColor: "var(--color-border)" }}
                         >
                           {dataGreenhouse.map((item, index) => {
-                            return (
+                            return item.id == dataGreenhouse[0].id ? (
+                              <option
+                                color={"var(--color-border)"}
+                                key={index}
+                                value={item.id}
+                                selected
+                              >
+                                {item.name}
+                              </option>
+                            ) : (
                               <option
                                 color={"var(--color-border)"}
                                 key={index}

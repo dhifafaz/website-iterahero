@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { Text, Image, Flex, Wrap, WrapItem, Center } from "@chakra-ui/react";
-import { Link } from "react-router-dom";
 import axios from "axios";
 import { paginationAktuator } from "../..//Utility/api_link";
 import Loading from "../../component/loading/loading";
@@ -51,44 +50,41 @@ const CardAktuator = (props) => {
               mt={"30px"}
             >
               {dataTable.map((item, index) => (
-                <Link to={`/unit/dashboard/aktuator/${item.id}`} key={index}>
-                  <WrapItem
-                    className="hiya"
-                    key={index}
-                    w={{ base: "90vw", md: "sm" }}
-                    bg={"#ffff"}
-                    borderRadius={"10px"}
-                    border={"1px solid #E2E8F0"}
-                    paddingTop={"30px"}
-                    paddingBottom={"30px"}
-                  >
-                    <Center
-                      justifyContent={"center"}
+                <WrapItem
+                  className="hiya"
+                  key={index}
+                  w={{ base: "90vw", md: "sm" }}
+                  h={"100%"}
+                  minH={"430px"}
+                  bg={"#ffff"}
+                  borderRadius={"10px"}
+                  border={"1px solid #E2E8F0"}
+                  paddingTop={"30px"}
+                  paddingBottom={"30px"}
+                  justifyContent={"center"}
+                  alignItems={"center"}
+                  flexDir={"row"}
+                >
+                  <Center data={{ data: idApi }} flexDir={"column"}>
+                    <Flex flexDir={"row"} justify={"space-between"}>
+                      <Image size={5} src={`${item.icon}`} color={item.color} />
+                      <Text color={`${item.color}`}>{item.name}</Text>
+                    </Flex>
+                    <Flex
                       flexDir={"column"}
-                      data={{ data: idApi }}
+                      justifyContent={"center"}
+                      alignItems={"center"}
                     >
-                      <Flex flexDir={"row"} justify={"space-between"}>
-                        <Image
-                          size={5}
-                          src={`${item.icon}`}
-                          color={item.color}
-                        />
-                        <Text color={`${item.color}`}>{item.name}</Text>
-                      </Flex>
-                      <Flex flexDir={"column"} justify={"center"}>
-                        <Link to={`#`}>
-                          <ValueAktuator
-                            data={{
-                              id: item.id,
-                              life_cycle: item.status_lifecycle,
-                              automation: item.automation,
-                            }}
-                          />
-                        </Link>
-                      </Flex>
-                    </Center>
-                  </WrapItem>
-                </Link>
+                      <ValueAktuator
+                        data={{
+                          id: item.id,
+                          life_cycle: item.status_lifecycle,
+                          automation: item.automation,
+                        }}
+                      />
+                    </Flex>
+                  </Center>
+                </WrapItem>
               ))}
             </Wrap>
           </Flex>

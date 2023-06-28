@@ -26,7 +26,10 @@ const Monitoring = () => {
           Authorization: "Bearer " + header,
         },
       })
-      .then((response) => setDataApi(response.data.data));
+      .then((response) => {
+        setDataApi(response.data.data);
+        setData(response.data.data[0].id);
+      });
     console.log(dataApi).catch((error) => {
       localStorage.clear();
       navigate("/login");
@@ -62,7 +65,7 @@ const Monitoring = () => {
             <Flex width={"30%"}>
               <Formik
                 initialValues={{
-                  greenhouse: "",
+                  greenhouse: dataApi[0].id,
                 }}
                 onSubmit={(values) => {
                   setData(values.greenhouse);
@@ -103,7 +106,16 @@ const Monitoring = () => {
                           _focusWithin={{ borderColor: "var(--color-border)" }}
                         >
                           {dataApi.map((item, index) => {
-                            return (
+                            return index == 0 ? (
+                              <option
+                                color={"var(--color-border)"}
+                                key={index}
+                                value={item.id}
+                                selected
+                              >
+                                {item.name}
+                              </option>
+                            ) : (
                               <option
                                 color={"var(--color-border)"}
                                 key={index}
