@@ -144,7 +144,7 @@ const AutomationAddBySensor = (props) => {
   const getSensor = async (id_greenhouse) => {
     setIsLoading(true);
     await axios
-      .get(`${monitoringApi}${id_greenhouse}`, {
+      .get(`${monitoringApi}${id_greenhouse}&&size=100`, {
         headers: {
           Authorization: "Bearer " + header,
         },

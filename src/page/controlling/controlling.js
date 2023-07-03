@@ -26,8 +26,12 @@ const Controlling = () => {
         },
       })
       .then((response) => {
-        setDataApi(response.data.data);
-        setData(response.data.data[0].id);
+        if (response.data.data.length > 0) {
+          setDataApi(response.data.data);
+          setData(response.data.data[0].id);
+        } else {
+          setDataApi(response.data.data);
+        }
       })
       .catch((error) => {
         localStorage.clear();
@@ -64,7 +68,7 @@ const Controlling = () => {
             <Flex width={"30%"}>
               <Formik
                 initialValues={{
-                  greenhouse: dataApi[0].id,
+                  data,
                 }}
                 onSubmit={(values) => {
                   setData(values.greenhouse);

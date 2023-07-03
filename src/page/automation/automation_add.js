@@ -20,7 +20,7 @@ const AutomationAdd = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(routePageName("add automation"));
+    dispatch(routePageName("add Automation"));
   }, []);
 
   return (

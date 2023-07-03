@@ -40,6 +40,13 @@ const GrafikComponent = (props) => {
         },
       })
       .then((response) => {
+        if (value === "Day") {
+          response.data.data.map(
+            (data, index) =>
+              (response.data.data[index].label =
+                parseInt(response.data.data[index].label) + 7)
+          );
+        }
         setDataSensor(response.data.data);
       });
   };

@@ -58,8 +58,13 @@ const Dashboard = () => {
         },
       })
       .then((response) => {
-        setDataGreenhouse(response.data.data);
-        setData(response.data.data[0].id);
+        if (response.data.data.length > 0) {
+          console.log(response.data.data);
+          setDataGreenhouse(response.data.data);
+          setData(response.data.data[0].id);
+        } else {
+          setDataGreenhouse(response.data.data);
+        }
       })
       .catch((error) => {
         localStorage.clear();
@@ -167,7 +172,7 @@ const Dashboard = () => {
             <Flex width={"30%"}>
               <Formik
                 initialValues={{
-                  greenhouse: dataGreenhouse[0].id,
+                  greenhouse: data,
                 }}
                 onSubmit={(values) => {
                   setData(values.greenhouse);

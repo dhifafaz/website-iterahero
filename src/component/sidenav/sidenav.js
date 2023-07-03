@@ -51,7 +51,11 @@ const SideNav = () => {
               navSize={navSize}
               icon={FiHome}
               title="Dashboard"
-              active={routeName === "Dashboard"}
+              active={
+                routeName === "Dashboard" ||
+                routeName.includes("Automation") ||
+                routeName.includes("automation")
+              }
             />
           </Link>
           <Link
@@ -77,7 +81,9 @@ const SideNav = () => {
               navSize={navSize}
               icon={FiMonitor}
               title="Monitoring"
-              active={routeName === "Monitoring"}
+              active={
+                routeName === "Monitoring" || routeName === "Monitoring Detail"
+              }
             />
           </Link>
           <Link

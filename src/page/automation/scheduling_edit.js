@@ -131,6 +131,35 @@ const ScheduleEdit = () => {
         <Loading />
       ) : (
         <Flex w="100%" h={["100%"]} flexDir={"column"}>
+          <Flex bg="white" borderRadius="10px" p="10px">
+            <Flex>
+              <Link to="/unit/dashboard">
+                <Text fontSize="20px" fontWeight="bold" mr="10px">
+                  Dashboard
+                </Text>
+              </Link>
+            </Flex>
+            <Flex>
+              <Text fontSize="20px" fontWeight="bold" mr="10px">
+                {">"}
+              </Text>
+            </Flex>
+            <Flex>
+              <Link to={`/unit/dashboard/aktuator/${dataSchedule.id_actuator}`}>
+                <Text fontSize="20px" fontWeight="bold" mr="10px">
+                  Automation
+                </Text>
+              </Link>
+            </Flex>
+            <Flex>
+              <Text fontSize="20px" fontWeight="bold" mr="10px">
+                {">"}
+              </Text>
+            </Flex>
+            <Text fontSize="20px" fontWeight="bold" mb="10px">
+              {`Edit Automation ${id}`}
+            </Text>
+          </Flex>
           <Formik
             initialValues={{
               id_actuator: dataSchedule.id_actuator,
@@ -165,8 +194,11 @@ const ScheduleEdit = () => {
                     name="id_actuator"
                     id="id_actuator"
                   >
-                    <option value={id} color={"var(--color-primer)"}>
-                      {id}
+                    <option
+                      value={dataSchedule.id_actuator}
+                      color={"var(--color-primer)"}
+                    >
+                      {dataSchedule.id_actuator}
                     </option>
                   </Select>
                   <FormErrorMessage>{errors.id_actuator}</FormErrorMessage>

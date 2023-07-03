@@ -75,11 +75,12 @@ const Controlling_Edit = () => {
       .then((response) => {
         console.log(response);
         checkLoading(false);
-        navigate("/unit/controlling");
         alert("Data Aktuator Berhasil Diperbaharui");
+        navigate("/unit/controlling");
       })
       .catch((error) => {
-        console.log(error);
+        localStorage.clear();
+        navigate("/login");
       });
   };
 

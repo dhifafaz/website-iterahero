@@ -41,7 +41,9 @@ const GrafikValue = (props) => {
             ? "Grafik Sensor Perbulan"
             : `${value}` == "Year"
             ? "Grafik Sensor Pertahun"
-            : "Tahun",
+            : `${value}` == "Day"
+            ? "Grafik Sensor Perhari"
+            : " ",
       },
     },
     scales: {
@@ -58,12 +60,14 @@ const GrafikValue = (props) => {
           display: true,
           text: (ctx) =>
             `${value}` == "Week"
-              ? "Tanggal"
+              ? "Mingguan"
               : `${value}` == "Month"
-              ? "Minggu"
+              ? "Bulanan"
               : `${value}` == "Year"
-              ? "Bulan"
-              : "Tahun",
+              ? "Tahunan"
+              : `${value}` == "Day"
+              ? "Harian"
+              : "",
         },
       },
     },

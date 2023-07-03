@@ -10,6 +10,8 @@ import dashboardControlMenu from "../../Utility/dashboard_control_menu";
 import CardLogActuator from "../../component/card_log_actuator/card_log_act";
 import CardAutomation from "../../component/card Automation/card_automation";
 import AutomationList from "./automation_list";
+import { useDispatch } from "react-redux";
+import { routePageName } from "../../redux/action";
 
 const Automation = () => {
   TabTitle("Detail Actuator - ITERA Hero");
@@ -38,9 +40,11 @@ const Automation = () => {
         navigate("/login");
       });
   };
+  const dispatch = useDispatch();
 
   useEffect(() => {
     getActuator();
+    dispatch(routePageName(`Automation`));
   }, [id, data]);
 
   return (
