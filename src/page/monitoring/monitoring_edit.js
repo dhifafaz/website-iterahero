@@ -46,9 +46,6 @@ const Monitoring_Edit = () => {
     range_max: yup.number().required("Range Max harus diisi"),
     range_min: yup.number().required("Range Min harus diisi"),
     id_category_sensor: yup.string().required("id_category_sensor harus diisi"),
-    detail: yup.string().required("Kategori harus diisi"),
-    sensor_image: yup.object().required("Kategori harus diisi"),
-    posisition: yup.object().required("Kategori harus diisi"),
   });
 
   const dispatch = useDispatch();
@@ -177,8 +174,7 @@ const Monitoring_Edit = () => {
       dataSend.brand == "" ||
       dataSend.range_max == "" ||
       dataSend.range_min == "" ||
-      dataSend.id_category_sensor == "" ||
-      dataSend.detail == ""
+      dataSend.id_category_sensor == ""
     ) {
       return alert("Masih ada yang belum di isi");
     } else {
@@ -504,7 +500,7 @@ const Monitoring_Edit = () => {
                     variant="outline"
                     placeholder="detail sensor..."
                   />
-                  <FormErrorMessage>{errors.range_min}</FormErrorMessage>
+                  <FormErrorMessage>{errors.detail}</FormErrorMessage>
                 </FormControl>
                 <FormControl
                   marginTop={"20px"}

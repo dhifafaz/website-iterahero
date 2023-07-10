@@ -133,7 +133,7 @@ const ScheduleEdit = () => {
         <Flex w="100%" h={["100%"]} flexDir={"column"}>
           <Flex bg="white" borderRadius="10px" p="10px">
             <Flex>
-              <Link to="/unit/dashboard">
+              <Link to="/unit/dashboard/2">
                 <Text fontSize="20px" fontWeight="bold" mr="10px">
                   Dashboard
                 </Text>

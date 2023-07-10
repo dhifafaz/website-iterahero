@@ -65,9 +65,6 @@ const Monitoring_Add = () => {
     range_max: yup.number().required("Range Max harus diisi"),
     range_min: yup.number().required("Range Min harus diisi"),
     id_category_sensor: yup.number().required("Kategori harus diisi"),
-    detail: yup.string().required("Kategori harus diisi"),
-    sensor_image: yup.object().required("Kategori harus diisi"),
-    posisition: yup.object().required("Kategori harus diisi"),
     id_greenhouse: yup.number().required(""),
   });
   const [iconsList, setIconsList] = useState(null);

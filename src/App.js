@@ -32,7 +32,7 @@ function App() {
       <Route path="/" element={<Navigate to="/login" replace />} />
       <Route path="/login" element={<Login />} />
       <Route path="/unit" element={<Board />}>
-        <Route path="dashboard" element={<Dashboard />} />
+        <Route path="dashboard/:id" element={<Dashboard />} />
         <Route path="greenhouse" element={<GreenHouse />} />
         <Route path="monitoring" element={<Monitoring />} />
         <Route path="controlling" element={<Controlling />} />

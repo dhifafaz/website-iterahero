@@ -54,7 +54,7 @@ const Grafik = () => {
         <>
           <Flex bg="white" borderRadius="10px" p="10px">
             <Flex>
-              <Link to="/unit/dashboard">
+              <Link to="/unit/dashboard/1">
                 <Text fontSize="20px" fontWeight="bold" mr="10px">
                   Dashboard
                 </Text>
@@ -136,6 +136,7 @@ const Grafik = () => {
                 data={{
                   value: data,
                   id: id,
+                  name: dataApi,
                 }}
               />
               <GrafikComponent

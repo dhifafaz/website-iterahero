@@ -61,7 +61,7 @@ const Automation = () => {
             justifyContent={"start"}
           >
             <Flex alignItems={"center"}>
-              <Link to="/unit/dashboard">
+              <Link to="/unit/dashboard/2">
                 <Text
                   fontSize={{ base: "15px", md: "20px" }}
                   fontWeight="bold"

@@ -19,19 +19,20 @@ import { TabTitle } from "../../Utility/utility";
 import axios from "axios";
 import Loading from "../../component/loading/loading";
 import { dashboardApi, greenhouseByUserId } from "../../Utility/api_link";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { Formik } from "formik";
 import dashboardMenu from "../../Utility/dashboard_menu";
 import CardSensor from "../../component/card_sensor/card_sensor";
 import CardAktuator from "../../component/card_aktuator/card_aktuator";
 const Dashboard = () => {
+  let id = parseInt(useParams().id);
   TabTitle("Dashboard - ITERA Hero");
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [data, setData] = useState("");
 
   const [dataApi, setDataApi] = useState(null);
-  const [selected, setSelected] = useState(1);
+  const [selected, setSelected] = useState(id);
   const [dataGreenhouse, setDataGreenhouse] = useState(null);
   const [dataSensor, setDataSensor] = useState(null);
 

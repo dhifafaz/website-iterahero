@@ -26,7 +26,7 @@ const AutomationAdd = () => {
   return (
     <Wrap w={["100%"]}>
       <Flex bg="white" borderRadius="10px" w={["100%"]}>
-        <Link to="/unit/dashboard">
+        <Link to="/unit/dashboard/2">
           <Text fontSize={{ base: "15px", md: "20px" }} fontWeight="bold">
             Dashboard
           </Text>

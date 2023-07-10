@@ -8,6 +8,7 @@ import Loading from "../../component/loading/loading";
 const SummaryComponent = (props) => {
   const id = props.data.id;
   const value = props.data.value;
+  const name = props.data.name;
   const [isLoading, setIsLoading] = useState(false);
   const [dataSensor, setDataSensor] = useState([]);
 
@@ -46,7 +47,7 @@ const SummaryComponent = (props) => {
       })
       .then((response) => {
         const jsonData = JSON.stringify(response.data);
-        exportData(jsonData, "data.json", "application/json");
+        exportData(jsonData, `datasheet ${name}.json`, "application/json");
         setIsLoading(false);
       })
       .catch((error) => {

@@ -39,9 +39,6 @@ const Controlling_Edit = () => {
     name: yup.string().required("Nama harus diisi"),
     icon: yup.string().required("Ikon harus diisi"),
     color: yup.string().required("Warna harus diisi"),
-    detailact: yup.string().required("Kategori harus diisi"),
-    actuator_image: yup.object().required("Kategori harus diisi"),
-    posisitionact: yup.object().required("Kategori harus diisi"),
   });
 
   const dispatch = useDispatch();
@@ -111,12 +108,7 @@ const Controlling_Edit = () => {
     dataSend.icon = icon;
     dataSend.detailact = detailact;
 
-    if (
-      dataSend.name == "" ||
-      dataSend.icon == "" ||
-      dataSend.color == "" ||
-      dataSend.detailact == " "
-    ) {
+    if (dataSend.name == "" || dataSend.icon == "" || dataSend.color == "") {
       return alert("Masih ada yang belum di isi");
     } else {
       checkLoading(true);

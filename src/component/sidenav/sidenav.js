@@ -42,7 +42,7 @@ const SideNav = () => {
           </Box>
 
           <Link
-            to={"/unit/dashboard"}
+            to={"/unit/dashboard/1"}
             onClick={() => {
               patchRoute("Dashboard");
             }}
