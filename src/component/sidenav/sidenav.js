@@ -28,9 +28,12 @@ const SideNav = () => {
           lg: "flex",
         }}
         pos="sticky"
-        h="100vh"
+        h="150vh"
         boxShadow="0 4px 12px 0 rgba(0, 0, 0, 0.05)"
-        w={"370px"}
+        w={{
+          base: "230px",
+          xl: "370px",
+        }}
         flexDir="column"
         justifyContent="space-between"
       >
@@ -108,7 +111,7 @@ const SideNav = () => {
             <NavItem
               navSize={navSize}
               icon={AiOutlineHistory}
-              title="History Notification"
+              title="Notification"
               active={routeName === "History Notification"}
             />
           </Link>

@@ -109,7 +109,7 @@ const TableMonitoring = (props) => {
         <Loading />
       ) : (
         <Box
-          width={"100%"}
+          width={{ base: "92vw", lg: "73vw", xl: "78vw" }}
           borderRadius={"md"}
           boxShadow={"md"}
           bg={"var(--color-on-primary)"}
@@ -122,159 +122,149 @@ const TableMonitoring = (props) => {
             bg={"var(--color-on-primary)"}
             justify="flex-start"
             mt={30}
+            width={"100%"}
           >
-            <TableContainer
-              borderRadius={"md"}
-              bg={"white"}
-              width="100%"
-              overflowX="auto"
-            >
-              <Table
-                variant="simple"
-                size={["lg", "md", "sm"]}
-                overflowX={"hidden"}
-              >
-                <Thead>
-                  <Tr
-                    textAlign={"center"}
-                    alignContent={"center"}
-                    alignItems={"center"}
-                    justifyContent={"center"}
-                  >
-                    <Th textAlign={"center"}>No</Th>
-                    <Th textAlign={"center"}>Nama Alat</Th>
-                    <Th textAlign={"center"}>Icon</Th>
-                    <Th textAlign={"center"}>Satuan Ukur</Th>
-                    <Th textAlign={"center"}>Merek</Th>
-                    <Th textAlign={"center"}>Warna</Th>
-                    <Th textAlign={"center"}>Persamaan Kalibrasi</Th>
-                    <Th textAlign={"center"}>Range Min</Th>
-                    <Th textAlign={"center"}>Range Max</Th>
-                    <Th textAlign={"center"}>Detail</Th>
-                    <Th textAlign={"center"}>Aksi</Th>
-                  </Tr>
-                </Thead>
-                <Tbody>
-                  {dataTable.map((item, index) => {
-                    return (
-                      <Tr key={index}>
-                        <Td textAlign={"center"} color={"var(--color-primer)"}>
-                          {index + 1}
-                        </Td>
-                        <Td textAlign={"center"} color={"var(--color-primer)"}>
-                          {item.name}
-                        </Td>
-                        <Td
-                          display={"flex"}
-                          justifyContent="center"
-                          alignItems={"center"}
+            <Table variant="simple" overflowX={"scroll"} width={"100%"}>
+              <Thead>
+                <Tr
+                  textAlign={"center"}
+                  alignContent={"center"}
+                  alignItems={"center"}
+                  justifyContent={"center"}
+                >
+                  <Th textAlign={"center"}>No</Th>
+                  <Th textAlign={"center"}>Nama Alat</Th>
+                  <Th textAlign={"center"}>Icon</Th>
+                  <Th textAlign={"center"}>Satuan Ukur</Th>
+                  <Th textAlign={"center"}>Merek</Th>
+                  <Th textAlign={"center"}>Warna</Th>
+                  <Th textAlign={"center"}>Persamaan Kalibrasi</Th>
+                  <Th textAlign={"center"}>Range Min</Th>
+                  <Th textAlign={"center"}>Range Max</Th>
+                  <Th textAlign={"center"}>Detail</Th>
+                  <Th textAlign={"center"}>Aksi</Th>
+                </Tr>
+              </Thead>
+              <Tbody>
+                {dataTable.map((item, index) => {
+                  return (
+                    <Tr key={index}>
+                      <Td textAlign={"center"} color={"var(--color-primer)"}>
+                        {index + 1}
+                      </Td>
+                      <Td textAlign={"center"} color={"var(--color-primer)"}>
+                        {item.name}
+                      </Td>
+                      <Td
+                        display={"flex"}
+                        justifyContent="center"
+                        alignItems={"center"}
+                      >
+                        <Image height={"30px"} src={item.icon} alt="icon" />
+                      </Td>
+                      <Td textAlign={"center"} color={"var(--color-primer)"}>
+                        {item.unit_measurement}
+                      </Td>
+                      <Td textAlign={"center"} color={"var(--color-primer)"}>
+                        {item.brand}
+                      </Td>
+                      <Td
+                        display={"flex"}
+                        justifyContent="center"
+                        alignItems={"center"}
+                      >
+                        <Box
+                          width={"30px"}
+                          borderRadius={"100px"}
+                          height={"30px"}
+                          background={item.color}
+                        ></Box>
+                      </Td>
+                      <Td textAlign={"center"} color={"var(--color-primer)"}>
+                        {item.calibration}
+                      </Td>
+                      <Td textAlign={"center"} color={"var(--color-primer)"}>
+                        {item.range_min}
+                      </Td>
+                      <Td textAlign={"center"} color={"var(--color-primer)"}>
+                        {item.range_max}
+                      </Td>
+                      <Td textAlign={"center"} color={"var(--color-primer)"}>
+                        <Link
+                          to={{
+                            pathname: "/unit/monitoring/detail/" + item.id,
+                          }}
+                          state={{
+                            data: item,
+                          }}
                         >
-                          <Image height={"30px"} src={item.icon} alt="icon" />
-                        </Td>
-                        <Td textAlign={"center"} color={"var(--color-primer)"}>
-                          {item.unit_measurement}
-                        </Td>
-                        <Td textAlign={"center"} color={"var(--color-primer)"}>
-                          {item.brand}
-                        </Td>
-                        <Td
-                          display={"flex"}
-                          justifyContent="center"
-                          alignItems={"center"}
-                        >
-                          <Box
-                            width={"30px"}
-                            borderRadius={"100px"}
-                            height={"30px"}
-                            background={item.color}
-                          ></Box>
-                        </Td>
-                        <Td textAlign={"center"} color={"var(--color-primer)"}>
-                          {item.calibration}
-                        </Td>
-                        <Td textAlign={"center"} color={"var(--color-primer)"}>
-                          {item.range_min}
-                        </Td>
-                        <Td textAlign={"center"} color={"var(--color-primer)"}>
-                          {item.range_max}
-                        </Td>
-                        <Td textAlign={"center"} color={"var(--color-primer)"}>
+                          <Button>Detail</Button>
+                        </Link>
+                      </Td>
+                      <Td textAlign={"center"}>
+                        <Flex justifyContent={"space-evenly"}>
                           <Link
                             to={{
-                              pathname: "/unit/monitoring/detail/" + item.id,
+                              pathname: "/unit/monitoring/edit/" + item.id,
                             }}
                             state={{
                               data: item,
                             }}
                           >
-                            <Button>Detail</Button>
-                          </Link>
-                        </Td>
-                        <Td textAlign={"center"}>
-                          <Flex justifyContent={"space-evenly"}>
-                            <Link
-                              to={{
-                                pathname: "/unit/monitoring/edit/" + item.id,
-                              }}
-                              state={{
-                                data: item,
-                              }}
-                            >
-                              <Button
-                                bg={"var(--color-on-primary)"}
-                                color={"var(--color-info)"}
-                              >
-                                <RiPencilFill />
-                              </Button>
-                            </Link>
                             <Button
-                              onClick={() => {
-                                setId(item.id);
-                                setName(item.name);
-                                onOpen();
-                              }}
                               bg={"var(--color-on-primary)"}
-                              color={"var(--color-error)"}
+                              color={"var(--color-info)"}
                             >
-                              <RiDeleteBinFill />
+                              <RiPencilFill />
                             </Button>
-                            <Modal isOpen={isOpen} onClose={onClose}>
-                              <ModalOverlay />
-                              <ModalContent>
-                                <ModalHeader>Peringatan !</ModalHeader>
-                                <ModalCloseButton />
-                                <ModalBody>
-                                  Apakah anda yakin ingin menghapus {name} ini?
-                                </ModalBody>
-                                <ModalFooter>
-                                  <Button
-                                    colorScheme="blue"
-                                    onClick={(e) => {
-                                      deleteItem(e, id);
-                                      onClose();
-                                    }}
-                                    mr={3}
-                                  >
-                                    Hapus
-                                  </Button>
-                                  <Button
-                                    onClick={() => {
-                                      onClose();
-                                    }}
-                                  >
-                                    Batal
-                                  </Button>
-                                </ModalFooter>
-                              </ModalContent>
-                            </Modal>
-                          </Flex>
-                        </Td>
-                      </Tr>
-                    );
-                  })}
-                </Tbody>
-              </Table>
-            </TableContainer>
+                          </Link>
+                          <Button
+                            onClick={() => {
+                              setId(item.id);
+                              setName(item.name);
+                              onOpen();
+                            }}
+                            bg={"var(--color-on-primary)"}
+                            color={"var(--color-error)"}
+                          >
+                            <RiDeleteBinFill />
+                          </Button>
+                          <Modal isOpen={isOpen} onClose={onClose}>
+                            <ModalOverlay />
+                            <ModalContent>
+                              <ModalHeader>Peringatan !</ModalHeader>
+                              <ModalCloseButton />
+                              <ModalBody>
+                                Apakah anda yakin ingin menghapus {name} ini?
+                              </ModalBody>
+                              <ModalFooter>
+                                <Button
+                                  colorScheme="blue"
+                                  onClick={(e) => {
+                                    deleteItem(e, id);
+                                    onClose();
+                                  }}
+                                  mr={3}
+                                >
+                                  Hapus
+                                </Button>
+                                <Button
+                                  onClick={() => {
+                                    onClose();
+                                  }}
+                                >
+                                  Batal
+                                </Button>
+                              </ModalFooter>
+                            </ModalContent>
+                          </Modal>
+                        </Flex>
+                      </Td>
+                    </Tr>
+                  );
+                })}
+              </Tbody>
+            </Table>
           </TableContainer>
           {dataTable.length > 0 ? (
             <Flex justify={"space-between"}>

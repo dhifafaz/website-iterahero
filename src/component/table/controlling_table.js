@@ -109,7 +109,7 @@ const TableControlling = (props) => {
         <Loading />
       ) : (
         <Box
-          width={"100%"}
+          width={{ base: "92vw", lg: "73vw", xl: "78vw" }}
           borderRadius={"md"}
           boxShadow={"md"}
           bg={"var(--color-on-primary)"}

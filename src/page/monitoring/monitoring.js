@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./monitoring.css";
-import { Text, Button, Select, Flex } from "@chakra-ui/react";
+import { Text, Button, Select, Flex, Wrap } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import { Formik } from "formik";
 import { useNavigate } from "react-router-dom";

@@ -9,7 +9,7 @@ const Board = () => {
   const { routeName } = useSelector((state) => state.userReducer);
   return (
     <Flex color="white" width="100%">
-      <Box bg="tomato" h={"100vh"}>
+      <Box bg="tomato" h={"100vh"} overflow={"hidden"}>
         <SideNav />
       </Box>
       <Box flex="1">
