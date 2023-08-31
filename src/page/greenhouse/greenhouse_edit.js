@@ -97,10 +97,8 @@ const GreenhouseEdit = () => {
 	const dispatch = useDispatch();
 
 	useEffect(() => {
+		dispatch(routePageName("Greenhouse"));
 		getApibyID();
-		return () => {
-			dispatch(routePageName("Greenhouse"));
-		};
 	}, []);
 
 	return (

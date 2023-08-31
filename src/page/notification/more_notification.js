@@ -11,9 +11,7 @@ const MoreNotification = () => {
 	TabTitle("Notifikasi - ITERA Hero");
 	const dispatch = useDispatch();
 	useEffect(() => {
-		return () => {
-			dispatch(routePageName("History Notification"));
-		};
+		dispatch(routePageName("History Notification"));
 	}, []);
 
 	return (
